@@ -1,6 +1,6 @@
 "use client";
 
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import {Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -27,6 +27,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import SearchBox from "./SearchBox";
+
 
 
 interface MenuItem {
@@ -144,7 +146,7 @@ const Navbar = ({
 
 
   return (
-    <section className={cn("py-4", className)}>
+    <section className={cn("py-4 bg-gradient-to-r from-white to-blue-100", className)}>
       <div className="container mx-auto px-4">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
@@ -152,7 +154,7 @@ const Navbar = ({
             {/* Logo */}
             <Link href={'/'} className="flex items-center gap-2">
              
-             <h1 className="text-2xl font-bold">DailyLayers</h1>
+             <h1 className="text-3xl font-bold">DL</h1>
             </Link>
             <div className="flex items-center">
               <NavigationMenu>
@@ -163,10 +165,11 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
+            <SearchBox/>
+            <Button asChild variant="outline" size="lg">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
-            <Button asChild size="sm">
+            <Button asChild size="lg">
               <Link href={auth.signup.url}>{auth.signup.title}</Link>
             </Button>
           </div>
@@ -202,6 +205,7 @@ const Navbar = ({
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
+                    <SearchBox/>
                   <Accordion
                     type="single"
                     collapsible
@@ -248,7 +252,7 @@ const renderMenuItem = (item: MenuItem) => {
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
        asChild
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
+        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-md font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
        <Link href={item.url}> {item.title}</Link>
       </NavigationMenuLink>
