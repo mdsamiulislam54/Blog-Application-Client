@@ -123,3 +123,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .bg-gradient-custom {
+    @apply bg-gradient-to-b from-blue-500 to-gray-900 text-white ;
+  }
+}

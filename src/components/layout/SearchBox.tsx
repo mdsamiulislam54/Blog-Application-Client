@@ -6,7 +6,7 @@ const SearchBox = () => {
       <input
         type="text"
         placeholder="Search..."
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-4 py-2 border border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
       <button className='absolute top-3 right-2 hover:text-blue-500 cursor-pointer'>
