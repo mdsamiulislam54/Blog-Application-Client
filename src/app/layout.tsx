@@ -46,7 +46,7 @@ export default function RootLayout({
         >
           <TanstackQueryProvider>
 
-            <Navbar />
+       
             {children}
             <ToastProvider />
           </TanstackQueryProvider>
