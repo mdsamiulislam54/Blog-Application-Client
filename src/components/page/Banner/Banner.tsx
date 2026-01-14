@@ -5,8 +5,13 @@ import { LoaderPinwheel } from 'lucide-react'
 
 const Banner = () => {
     return (
-        <div className="min-h-screen w-full bg-gradient-to-b from-blue-500 to-gray-900 ">
-            <div className="container mx-auto px-4 flex flex-col items-center gap-10 py-20 text-center">
+
+        <div className="min-h-screen w-full bg-no-repeat bg-cover bg-center relative" 
+        style={{backgroundImage: `url("https://img.freepik.com/free-photo/top-view-female-hands-work-computer-blue-background_169016-18179.jpg?t=st=1768320676~exp=1768324276~hmac=16e8ac2d80d410e3794eee8b84ecf6e19b944c7ef2d3f34986fa988ea60f6e0b&w=1060")`}}
+
+        >
+            <div className='absolute inset-0 bg-black/70 z-1 '></div>
+            <div className="container mx-auto px-4 flex flex-col items-center gap-10 py-20 text-center z-10 relative">
 
                 <h1 className="font-extrabold uppercase leading-none text-[14vw] md:text-[12vw] relative">
                     {/* D */}
@@ -38,7 +43,7 @@ const Banner = () => {
                     <span className="text-gray-100 animate-pulse">.</span>
 
                     <span className="absolute top-0 right-10 transform -translate-y-1/2">
-                        <LoaderPinwheel size={50} className='animate-spin text-gray-700'/>
+                        <LoaderPinwheel size={50} className='animate-spin text-gray-400'/>
                     </span>
                  
                 </h1>

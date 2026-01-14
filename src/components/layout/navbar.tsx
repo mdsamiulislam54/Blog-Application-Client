@@ -1,6 +1,6 @@
 "use client";
 
-import {Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -28,6 +28,9 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import SearchBox from "./SearchBox";
+import GetUser from "@/hook/useSession/useSession";
+import Image from "next/image";
+import { ModeToggle } from "../Provider/Theme-Provider/DarkMode";
 
 
 
@@ -135,7 +138,7 @@ const Navbar = ({
       title: "Contact",
       url: "/contact",
     },
-    
+
   ],
   auth = {
     login: { title: "Login", url: "/auth/login" },
@@ -144,17 +147,17 @@ const Navbar = ({
   className,
 }: Navbar1Props) => {
 
-
+  const user = GetUser();
   return (
-    <section className={cn("py-4 bg-gradient-to-r from-white to-blue-100", className)}>
+    <section className={cn("py-4 ", className)}>
       <div className="container mx-auto px-4">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
             <Link href={'/'} className="flex items-center gap-2">
-             
-             <h1 className="text-3xl font-bold">DL</h1>
+
+              <h1 className="text-3xl font-bold">DL</h1>
             </Link>
             <div className="flex items-center">
               <NavigationMenu>
@@ -164,28 +167,42 @@ const Navbar = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
-            <SearchBox/>
-            <Button asChild variant="outline" size="lg">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="lg">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+
+
+
+
+          <div className="flex gap-10 items-center">
+            <ModeToggle/>
+            <SearchBox />
+            {user ? (
+              <button >
+                <Image src={user?.image as string} alt="User Avatar" width={50} height={50} className="rounded-full border-2 border-blue-400" />
+
+              </button>
+            ) : (
+              <>
+                <Button asChild variant="outline">
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
+                </Button>
+                <Button asChild>
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                </Button>
+              </>
+            )}
+
           </div>
+
+
+
         </nav>
 
         {/* Mobile Menu */}
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-            </a>
+            <Link href={'/'} className="flex items-center gap-2">
+              <h1 className="text-3xl font-bold">DL</h1>
+            </Link>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -195,17 +212,14 @@ const Navbar = ({
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
-                      <img
-                        src={logo.src}
-                        className="max-h-8 dark:invert"
-                        alt={logo.alt}
-                      />
-                    </a>
+                    <Link href={'/'} className="flex items-center gap-2">
+                      <h1 className="text-3xl font-bold">DL</h1>
+                    </Link>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
-                    <SearchBox/>
+                  <ModeToggle/>
+                  <SearchBox />
                   <Accordion
                     type="single"
                     collapsible
@@ -214,14 +228,29 @@ const Navbar = ({
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
 
-                  <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <Link href={auth.login.url}>{auth.login.title}</Link>
-                    </Button>
-                    <Button asChild>
-                      <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                    </Button>
-                  </div>
+                  {
+                    user ? (
+                      <div className="flex flex-col  gap-5">
+
+                        <Link href="/profile" className="text-md font-semibold">
+                          My  Profile
+                        </Link>
+
+                        <Button >
+                          LogOut
+                        </Button>
+                      </div>
+                    ) : (
+                      <>
+                        <Button asChild variant="outline">
+                          <Link href={auth.login.url}>{auth.login.title}</Link>
+                        </Button>
+                        <Button asChild>
+                          <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                        </Button>
+                      </>
+                    )
+                  }
                 </div>
               </SheetContent>
             </Sheet>
@@ -251,10 +280,10 @@ const renderMenuItem = (item: MenuItem) => {
   return (
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
-       asChild
+        asChild
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-md font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
-       <Link href={item.url}> {item.title}</Link>
+        <Link href={item.url}> {item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );

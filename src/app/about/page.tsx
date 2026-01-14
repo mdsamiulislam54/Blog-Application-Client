@@ -9,7 +9,7 @@ const AboutPage = () => {
           <h1 className="text-center text-[10vw] font-bold uppercase mt-10 mb-6 leading-none">
             {/* ABOUT */}
             <span className="text-blue-400">A</span>
-            <span className="text-blue-500">b</span>
+            <span className="text-blue-300">b</span>
             <span className="text-sky-400">o</span>
             <span className="text-cyan-300">u</span>
             <span className="text-blue-300">t</span>
@@ -19,7 +19,7 @@ const AboutPage = () => {
 
             {/* DAILYLAYERS */}
             <span className="text-red-300">D</span>
-            <span className="text-yellow-400">a</span>
+            <span className="text-yellow-200">a</span>
             <span className="text-gray-100">i</span>
             <span className="text-sky-200">l</span>
             <span className="text-blue-400 text-[12vw] animate-pulse">y</span>
@@ -28,7 +28,7 @@ const AboutPage = () => {
             <span className="text-yellow-300">a</span>
             <span className="text-purple-400 text-[12vw] animate-pulse">y</span>
             <span className="text-green-500">e</span>
-            <span className="text-amber-300">r</span>
+            <span className="text-amber-500">r</span>
             <span className="text-slate-200">s</span>
           
           </h1>

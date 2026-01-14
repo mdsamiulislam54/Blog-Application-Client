@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import './globals.css';
 import { Navbar } from "@/components/layout/navbar";
-import ToastProvider from "@/components/ToastProvider/ToastProvider";
-import TanstackQueryProvider from "@/components/TanstackQueryProvider/TanstackQueryProvider";
+import ToastProvider from "@/components/Provider/ToastProvider/ToastProvider";
+import TanstackQueryProvider from "@/components/Provider/TanstackQueryProvider/TanstackQueryProvider";
+import { ThemeProvider } from "@/components/Provider/Theme-Provider/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-  const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-  });
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -33,16 +34,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${poppins.variable} antialiased`}
       >
-        <TanstackQueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TanstackQueryProvider>
 
-          <Navbar />
-          {children}
-          <ToastProvider />
-        </TanstackQueryProvider>
+            <Navbar />
+            {children}
+            <ToastProvider />
+          </TanstackQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
