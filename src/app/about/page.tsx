@@ -1,7 +1,9 @@
 import Image from "next/image"
 import AboutImage from '@/images/about.svg'
 
-const AboutPage = () => {
+const AboutPage = async() => {
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  throw new Error('Failed to fetch data');
   return (
     <div>
       <div className="w-full flex justify-center items-center h-screen-[40vh] bg-gradient-custom ">
