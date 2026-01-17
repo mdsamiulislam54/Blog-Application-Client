@@ -1,5 +1,6 @@
 
 import { AppSidebar } from "@/components/layout/Dashboard/app-sidebar"
+import { ModeToggle } from "@/components/Provider/Theme-Provider/DarkMode"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -16,14 +17,14 @@ import {
 } from "@/components/ui/sidebar"
 
 
-export default function DashboardLayout({ admin, user }: { admin: React.ReactNode, user: React.ReactNode, }) {
+export default function DashboardLayout({children, admin, user }: { children: React.ReactNode, admin: React.ReactNode, user: React.ReactNode, }) {
     const userInfo = {
         role: "admin",
         // Change to "user" to test user layout
     }
     return (
         <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar user={userInfo} />
             <SidebarInset>
                 <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
                     <SidebarTrigger className="-ml-1" />
@@ -44,11 +45,13 @@ export default function DashboardLayout({ admin, user }: { admin: React.ReactNod
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
+                    <ModeToggle/>
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4">
                     {userInfo.role === "admin" ? admin : user}
 
                 </div>
+                {children}
             </SidebarInset>
         </SidebarProvider>
     )
