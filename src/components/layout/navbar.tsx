@@ -142,6 +142,10 @@ const Navbar = ({
       title: "Dashboard",
       url: "/dashboard",
     },
+    {
+      title: "Departments",
+      url: "/home-p",
+    },
 
   ],
   auth = {
