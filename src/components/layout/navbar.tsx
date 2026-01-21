@@ -28,9 +28,10 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import SearchBox from "./SearchBox";
-import GetUser from "@/hook/useSession/useSession";
+import getUser from "@/hooks/useSession/useSession";
 import Image from "next/image";
 import { ModeToggle } from "../Provider/Theme-Provider/DarkMode";
+import useSignOut from "@/hooks/useSignOut/useSignOut";
 
 
 
@@ -154,8 +155,12 @@ const Navbar = ({
   },
   className,
 }: Navbar1Props) => {
-
-  const user = GetUser();
+  const { mutate: signOutMutate, isPending: isSignOutPending,reset } = useSignOut()
+  const user = getUser();
+  const handaleSignOut = () => {
+    signOutMutate();
+    reset();
+  }
   return (
     <section className={cn("py-4 ", className)}>
       <div className="container mx-auto px-4">
@@ -180,13 +185,18 @@ const Navbar = ({
 
 
           <div className="flex gap-10 items-center">
-            <ModeToggle/>
+            <ModeToggle />
             <SearchBox />
             {user ? (
-              <button >
+              <>              <button >
                 <Image src={user?.image as string} alt="User Avatar" width={50} height={50} className="rounded-full border-2 border-blue-400" />
 
               </button>
+                <Button onClick={handaleSignOut} disabled={isSignOutPending}>
+                  {isSignOutPending ? 'Signing Out...' : 'Sign Out'}
+                </Button>
+
+              </>
             ) : (
               <>
                 <Button asChild variant="outline">
@@ -226,7 +236,7 @@ const Navbar = ({
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
-                  <ModeToggle/>
+                  <ModeToggle />
                   <SearchBox />
                   <Accordion
                     type="single"

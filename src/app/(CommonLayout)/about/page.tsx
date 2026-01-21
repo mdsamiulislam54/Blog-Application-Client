@@ -1,8 +1,9 @@
+
 import Image from "next/image"
 import AboutImage from '@/images/about.svg'
 export const dynamic = "force-dynamic"
 const AboutPage = async() => {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+ 
  
   return (
     <div>

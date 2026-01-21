@@ -1,4 +1,6 @@
-export const userRoutes = [
+import { NavItem } from "@/type/routes.type";
+
+export const userRoutes: NavItem[] = [
     { title: "User Profile", url: "/user/profile" },
     { title: "Orders", url: "/user/orders" },
     { title: "Wishlist", url: "/user/wishlist" },

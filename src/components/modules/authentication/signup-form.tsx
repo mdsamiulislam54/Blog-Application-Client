@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import Link from "next/link"
 
 import instance from "@/lib/axiosInstance/axios"
-import { useSignUp } from "@/hook/useSignUp/useSignUp"
+import { useSignUp } from "@/hooks/useSignUp/useSignUp"
 
 export function SignupForm({ className, ...props }: React.ComponentProps<"form">) {
 

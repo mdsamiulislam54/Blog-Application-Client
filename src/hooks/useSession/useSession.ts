@@ -1,8 +1,10 @@
+
 import { authClient } from "@/lib/auth-client"
 
-const GetUser = ()=>{
+const getUser = ()=>{
     const session =  authClient.useSession();
+    console.log(session)
     return session.data?.user;
 }
 
-export default GetUser;
+export default getUser;

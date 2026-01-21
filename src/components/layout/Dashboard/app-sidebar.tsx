@@ -14,32 +14,7 @@ import {
 import Link from "next/link"
 import { adminRoutes } from "@/routes/admin-routes";
 import { userRoutes } from "@/routes/user-routes";
-
-
-// This is sample data.
-// const data = {
-//   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-//   navMain: [
-//     {
-//       title: "Getting Started",
-//       url: "#",
-//       items: []
-//     },
-   
-  
-   
-//   ],
-// }
-
-
-
-
-
-interface NavItem {
-  title: string;
-  url: string;
-  isActive?: boolean;
-}
+import { NavItem } from "@/type/routes.type";
 
 export function AppSidebar({user, ...props }: {user:{role:string}} & React.ComponentProps<typeof Sidebar>) {
   let navItems: NavItem[] = [];

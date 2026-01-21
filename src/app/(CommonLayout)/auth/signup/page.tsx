@@ -1,6 +1,7 @@
 
 
-import { SignupForm } from "@/components/signup-form"
+
+import { SignupForm } from "@/components/modules/authentication/signup-form"
 import BannerImage from "@/images/Login-rafiki.svg"
 import Image from "next/image"
 
