@@ -15,11 +15,15 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { roles } from "@/constants/roles"
+
+import { userSession } from "@/services/user.service"
 
 
-export default function DashboardLayout({children, admin, user }: { children: React.ReactNode, admin: React.ReactNode, user: React.ReactNode, }) {
+export default async function DashboardLayout({ children, admin, user }: { children: React.ReactNode, admin: React.ReactNode, user: React.ReactNode, }) {
+    const { data } = await userSession.getSession()
     const userInfo = {
-        role: "admin",
+        role: data.user?.role,
         // Change to "user" to test user layout
     }
     return (
@@ -45,13 +49,13 @@ export default function DashboardLayout({children, admin, user }: { children: Re
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <ModeToggle/>
+                    <ModeToggle />
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4">
-                    {userInfo.role === "admin" ? admin : user}
-                     {children}
+                    {userInfo.role === roles.ADMIN ? admin : user}
+
                 </div>
-               
+
             </SidebarInset>
         </SidebarProvider>
     )

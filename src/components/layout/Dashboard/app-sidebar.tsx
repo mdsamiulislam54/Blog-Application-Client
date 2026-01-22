@@ -15,14 +15,15 @@ import Link from "next/link"
 import { adminRoutes } from "@/routes/admin-routes";
 import { userRoutes } from "@/routes/user-routes";
 import { NavItem } from "@/type/routes.type";
+import { roles } from "@/constants/roles";
 
 export function AppSidebar({user, ...props }: {user:{role:string}} & React.ComponentProps<typeof Sidebar>) {
   let navItems: NavItem[] = [];
   switch (user.role) {
-    case "admin":
+    case roles.ADMIN:
       navItems = adminRoutes;
       break;
-    case "user":
+    case roles.USER:
       navItems = userRoutes;
       break;
     default:
