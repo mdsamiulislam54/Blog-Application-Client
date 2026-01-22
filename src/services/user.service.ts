@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { cookies } from "next/headers";
 
 export const userSession = {
@@ -5,7 +6,7 @@ export const userSession = {
         try {
             const cookieStore = await cookies();
 
-            const session = await fetch(`${process.env.BACKEND_URL}/api/auth/get-session`, {
+            const session = await fetch(`${env.BACKEND_URL}/api/auth/get-session`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
