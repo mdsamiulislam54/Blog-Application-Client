@@ -1,22 +1,14 @@
 
 import Banner from "@/components/page/Banner/Banner";
-import { cookies } from "next/headers";
+import { userSession } from "@/services/user.service";
+
 
 export default async function Home() {
-  const cookieStore = await cookies();
-  
-  const session = await fetch(`${process.env.BACKEND_URL}/api/auth/get-session`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: cookieStore.toString()
-    },
-    cache: "no-store",
-    credentials: "include",
-  }).then((res) => res.json());
-  console.log("Home page session", session)
+  const session = await userSession.getSession();
   return (
     <div>
+
+      {JSON.stringify(session)}
       <Banner />
     </div>
   );
