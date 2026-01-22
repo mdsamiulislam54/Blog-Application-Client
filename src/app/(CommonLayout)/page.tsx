@@ -1,15 +1,18 @@
 
 import Banner from "@/components/page/Banner/Banner";
-import { userSession } from "@/services/user.service";
+import BlogPost from "@/components/page/blogs/blog";
+import { blogsPostService } from "@/services/blog.post";
+
 
 
 export default async function Home() {
-  const session = await userSession.getSession();
+  const posts = await blogsPostService.getBlogPost();
   return (
     <div>
+      {JSON.stringify(posts.data?.data?.pagination)}
 
-      {JSON.stringify(session)}
       <Banner />
+      <BlogPost post={posts.data?.data?.result} pagination={posts.data?.data?.pagination} />
     </div>
   );
 }
